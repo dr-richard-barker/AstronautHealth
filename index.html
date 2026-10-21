@@ -125,7 +125,8 @@
 <footer>
   <div class="wrap">
     <p>Astronaut Health · part of the <a href="https://cosecloud.com/">COSE</a> project family ·
-    <a href="https://dr-richard-barker.github.io/CoSE_Cloud/Hub/">full project hub</a><br>
+    <a href="https://dr-richard-barker.github.io/CoSE_Cloud/Hub/">full project hub</a> ·
+    <a href="https://dr-richard-barker.github.io/">Richard Barker · home</a><br>
     Richard Barker and collaborators.</p>
   </div>
 </footer>
@@ -145,7 +146,10 @@
   reg.groups.forEach(function(g){ g.items.forEach(function(it){ byId[it.id] = it; }); });
   function card(id){
     var it = byId[id]; if(!it || !it.url) return null;
-    var a = document.createElement("a"); a.className = "hubcard"; a.href = it.url + (it.url.indexOf("?")>=0?"&":"?") + "cose_scope=" + SCOPE;
+    var a = document.createElement("a"); a.className = "hubcard";
+    var u = it.url, h = u.indexOf("#"), frag = h >= 0 ? u.slice(h) : "";   // keep any #fragment last
+    if(h >= 0) u = u.slice(0, h);
+    a.href = u + (u.indexOf("?")>=0?"&":"?") + "cose_scope=" + SCOPE + frag;
     var img = document.createElement("img"); img.className = "thumb"; img.alt = ""; img.loading = "lazy";
     var ext = it.thumb_ext || "gif";
     img.src = "https://dr-richard-barker.github.io/Plant_response_to_radiation/cose/thumbs/" + id + "." + ext + "?v=4";
